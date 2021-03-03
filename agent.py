@@ -4,6 +4,7 @@ from rlbot.agents.base_agent import BaseAgent, GameTickPacket, SimpleControllerS
 
 from maneuvers.kickoffs.kickoff import Kickoff
 from maneuvers.maneuver import Maneuver
+from maneuvers.jumps.speed_flip import SpeedFlip
 from rlutilities.linear_algebra import vec3
 from rlutilities.simulation import Input
 from strategy import solo_strategy, teamplay_strategy
@@ -56,7 +57,6 @@ class BotimusPrime(BaseAgent):
 
         # choose maneuver
         if self.maneuver is None:
-
             if self.RENDERING:
                 self.draw.clear()
             
@@ -64,6 +64,7 @@ class BotimusPrime(BaseAgent):
                 self.maneuver = teamplay_strategy.choose_maneuver(self.info, self.info.cars[self.index])
             else:
                 self.maneuver = solo_strategy.choose_maneuver(self.info, self.info.cars[self.index])
+
         
         # execute maneuver
         if self.maneuver is not None:
